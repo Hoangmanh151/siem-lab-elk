@@ -3,7 +3,7 @@
 ## 📌 Tổng quan
 Xây dựng hệ thống SIEM với Elastic Stack để phát hiện tấn công brute-force SSH.
 
-**Công nghệ sử dụng:** Elastic Stack (ELK), Fleet Server, Elastic Agent, Kali Linux (Hydra), pfSense, Ubuntu Server, Windows Server.
+**Công nghệ sử dụng:** Elastic Stack (ELK), Kali Linux (Hydra), pfSense, Ubuntu Server, Windows Server.
 
 ---
 
@@ -68,7 +68,7 @@ Custom query: event.dataset:"system.auth" AND process.name:"sshd" AND event.outc
 <img width="1062" height="707" alt="severity" src="https://github.com/user-attachments/assets/e7b5964e-8069-429c-bca5-580b3c03591b" />
 <img width="1918" height="942" alt="alertkq2" src="https://github.com/user-attachments/assets/9ae9dd22-969a-45ae-8899-982f195dbea0" />
 
-✅ Kết quả
+## ✅ Kết quả
 Thu thập log từ Windows và Ubuntu
 
 Cấu hình pfSense port forward
