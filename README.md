@@ -33,6 +33,17 @@ Xây dựng hệ thống SIEM với Elastic Stack để phát hiện tấn công
 
 ## 💥 Mô phỏng tấn công
 
+Attack Flow:
+1. Attacker (Kali) launches brute-force using Hydra
+2. Traffic forwarded via pfSense (port 2222 → 22)
+3. Target (Ubuntu SSH) receives multiple login attempts
+4. Logs generated in system.auth
+5. Elastic Agent collects logs → Elasticsearch
+6. Kibana visualizes and detects anomaly
+7. Alert rule triggered
+
+---
+
 ### Máy kali dùng hydra để bruteforce
 
 hydra -l manh -P password.txt ssh://192.168.28.130 -s 2222
@@ -47,11 +58,13 @@ event.dataset:"system.auth" AND process.name:"sshd" AND event.outcome:"failure"
 <img width="1919" height="891" alt="query-log-fail" src="https://github.com/user-attachments/assets/5d7ec65c-51bd-46b1-bb38-a9d2a6e9e667" />
 
 ## 📊 Dashboard
-
+- Failed SSH login attempts over time → spike detected during attack
 <img width="1910" height="909" alt="dashboard1" src="https://github.com/user-attachments/assets/288f5c83-48bd-47d8-95ea-1c09971d49ff" />
 
+- Top source IPs → attacker IP identified
 <img width="1919" height="971" alt="dashboard2" src="https://github.com/user-attachments/assets/d04c6ff5-693b-4bf9-aa03-7ef63d77d255" />
 
+- Authentication success vs failure → abnormal ratio during attack window
 <img width="1919" height="948" alt="dashboard3" src="https://github.com/user-attachments/assets/443ad2e6-c942-48d5-b65d-8d88deb21da2" />
 
 ## ⚠️ Tạo rule cảnh báo
